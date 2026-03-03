@@ -28,7 +28,7 @@ public class FPSController : MonoBehaviour
 
 
     //Variables de referencia privadas
-    Rigidbody rb;
+    Rigidbody rb; 
     Animator anim;
 
     //Variables para el input
@@ -128,8 +128,8 @@ public class FPSController : MonoBehaviour
     {
         if (context.performed)
         {
-            isCrouching = !isCrouching;     
-            //Add animación
+            isCrouching = !isCrouching;
+            anim.SetBool("isCrouching", isCrouching);
         }
     }
     public void OnSprint(InputAction.CallbackContext context)
