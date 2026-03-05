@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,7 +46,10 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       if (canShoot && shooting && !reloading && bulletsLeft > 0)
+        {
+            StartCoroutine(ShootRoutine());
+        } 
     }
 
     void Shoot()
@@ -66,15 +70,60 @@ public class GunSystem : MonoBehaviour
         }
     }
 
+    void Reload()
+    {
+        if (bulletsLeft != ammoSize && !reloading) StartCoroutine(ReloadRoutine());
+    }
+    IEnumerator ReloadRoutine()
+    {
+        reloading = true; //Recargando
+        //LLAMADA DE ANIMACIÓN DE RECARGA
+
+        yield return new WaitForSeconds(reloadTime); //Esperar a que se haga la animacion
+        bulletsLeft = ammoSize; 
+        reloading = false;
+    }
+
+    IEnumerator ShootRoutine()
+    {
+        //Mide el tiempo entre disparo y la gestion del gasto de balas, ademas de gastar el raycast de disparo de Shoot()
+        canShoot = false; //No podemos disparar si ya lo estamos haciendo
+        if (!allowButtonHold)
+        {
+            shooting = false; //Cerrar ciclo de disparo
+        }
+        for (int i = 0; i < bulletsPerTap; i++)
+        {
+            if (bulletsLeft <= 0) break;  //2ª prev de errores
+            Shoot();
+            bulletsLeft--;
+        }
+        yield return new WaitForSeconds(shootingCooldown);
+        canShoot = true;
+    }
+
+
     #region Input Methods
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-
+        if (allowButtonHold)
+        {
+            shooting = context.ReadValueAsButton(); //Detecta constantemente si el boton esta pulsado
+        }
+        else
+        {
+            if (context.performed) shooting = true; //Shooting = true al pulsar
+        }
     }
     public void OnReload(InputAction.CallbackContext context)
     {
+        if (context.performed)
+        {
+            Reload();
+        }
 
     }
+
     #endregion
 }
