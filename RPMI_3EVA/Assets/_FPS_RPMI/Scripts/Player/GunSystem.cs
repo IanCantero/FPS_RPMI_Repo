@@ -50,16 +50,18 @@ public class GunSystem : MonoBehaviour
         {
             StartCoroutine(ShootRoutine());
         } 
-        void OnTriggerEnter(Collider other)
+        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ammo"))
         {
-            if (other.CompareTag("Ammo"))
-            {
-                canShoot = true;
-            }
-            if (other.CompareTag("NoAmmo"))
-            {
-                canShoot = false;
-            }
+            canShoot = true;
+        }
+        if (other.CompareTag("NoAmmo"))
+        {
+            canShoot = false;
         }
     }
 
