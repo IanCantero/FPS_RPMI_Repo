@@ -40,16 +40,27 @@ public class GunSystem : MonoBehaviour
     private void Awake()
     {
         bulletsLeft = ammoSize; //Cargador lleno al iniciar partida
-        canShoot = true;
+        canShoot = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (canShoot && shooting && !reloading && bulletsLeft > 0)
+        if (canShoot && shooting && !reloading && bulletsLeft > 0)
         {
             StartCoroutine(ShootRoutine());
         } 
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Ammo"))
+            {
+                canShoot = true;
+            }
+            if (other.CompareTag("NoAmmo"))
+            {
+                canShoot = false;
+            }
+        }
     }
 
     void Shoot()
@@ -77,6 +88,7 @@ public class GunSystem : MonoBehaviour
 
     void Reload()
     {
+        //En vez de regargar hacer que el arma se sobrecaliente y no se pueda disparar durante un tiempo, es lo mismo pero con otro enfoque, solo cambia la animación
         if (bulletsLeft != ammoSize && !reloading) StartCoroutine(ReloadRoutine());
     }
     IEnumerator ReloadRoutine()
