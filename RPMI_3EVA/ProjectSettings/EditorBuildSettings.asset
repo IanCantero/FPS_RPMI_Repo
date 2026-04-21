@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_FPS_RPMI/Scenes/SCN_Particles.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_FPS_RPMI/Scenes/SCN_Tutorial.unity
+    guid: 3b53ad0c19269064f94c9499d210ef9f
+  - enabled: 1
+    path: Assets/_FPS_RPMI/Scenes/SCN_1.1.unity
+    guid: 8de8a37ff11773c4bb6c90aacaf00ea8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 89db7651fe8ead945a07dd0addd0d6cf, type: 3}
   m_UseUCBPForAssetBundles: 0
