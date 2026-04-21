@@ -23,7 +23,7 @@ public class FPSController : MonoBehaviour
 
     [Header("Player State Bools")]
     [SerializeField] bool isSprinting;
-    [SerializeField] bool isCrouching;
+    public bool isCrouching { get; private set; }
     #endregion
 
 

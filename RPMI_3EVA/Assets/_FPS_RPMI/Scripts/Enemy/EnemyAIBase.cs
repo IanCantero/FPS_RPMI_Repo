@@ -43,13 +43,18 @@ public class EnemyAIBase : MonoBehaviour
     float stuckTimer; //Reloj que cuenta el tiempo de estar stuck
     float lastCheckTime; //Tiempo de chequeo previo a estar stuck
     Vector3 lastPosition; //Posición del último walkpoint perseguido
+
+
     #endregion
 
     private void Awake()
     {
         //Validación por si no encontramos al "Player" por nombre, para evitar NullReferenceExceptions
         GameObject playerObj = GameObject.Find("Player");
-        if (playerObj != null) target = playerObj.transform;
+        if (playerObj != null)
+        {
+            target = playerObj.transform;
+        }
 
         agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
@@ -67,6 +72,7 @@ public class EnemyAIBase : MonoBehaviour
     {
         //Acción que se encarga de la gestión de los estados de la IA
         //Esfera de detección física
+
         Collider[] hits = Physics.OverlapSphere(transform.position, sightRange, targetLayer);
         targetInSightRange = hits.Length > 0;
 
