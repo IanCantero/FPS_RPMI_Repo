@@ -41,6 +41,11 @@ public class EnemyAIBase : MonoBehaviour
     float lastCheckTime; //Tiempo de chequeo previo a estar stuck
     Vector3 lastPosition; //Posición del último walkpoint perseguido
 
+    [Header("More Stats")]
+    [SerializeField] float patrolingSpeed = 2f;
+    [SerializeField] float chasingSpeed = 4f;
+    Animator anim;
+    [SerializeField] GameObject body;
 
     #endregion
 
@@ -53,6 +58,7 @@ public class EnemyAIBase : MonoBehaviour
             target = playerObj.transform;
         }
 
+        anim = body.GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
         lastCheckTime = Time.time;
@@ -93,6 +99,9 @@ public class EnemyAIBase : MonoBehaviour
 
     void Patroling()
     {
+        //SPEED PARA PATRULLAJE
+        agent.speed = patrolingSpeed;
+
         //Define que el objeto patrulle y genere puntos de patrulla random
         //1 - Revisa si hay punto a patrullar
         if (!walkPointSet)
@@ -134,6 +143,9 @@ public class EnemyAIBase : MonoBehaviour
                 }
             }
         }
+        anim.SetBool("isWalking", true);
+        anim.SetBool("isChasing", false);
+
     }
 
     void SearchWalkPoint()
@@ -162,6 +174,10 @@ public class EnemyAIBase : MonoBehaviour
     {
         //Le dice al agente que persiga al target
         agent.SetDestination(target.position);
+
+        agent.speed = chasingSpeed;
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isChasing", true);
     }
 
     void AttackTarget()
@@ -188,10 +204,7 @@ public class EnemyAIBase : MonoBehaviour
         //Solo atacará si no se está atacando
         if (!alreadyAttacked)
         {
-            Rigidbody rb = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-
-
-            rb.AddForce(transform.forward * shootSpeedZ + transform.up * shootSpeedY, ForceMode.Impulse);
+            anim.SetTrigger("isAttacking");
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
