@@ -230,11 +230,11 @@ public class EnemyAIBlind : MonoBehaviour
     }
     IEnumerator Attack()
     {
-
-        anim.SetTrigger("isAttacking");
-        yield return new WaitForSeconds(0.8f); //Tiempo de espera para que la animación de ataque se sincronice con el hitbox
-        hitCollider.SetActive(true);
         alreadyAttacked = true;
+        anim.SetTrigger("isAttacking");
+        yield return new WaitForSeconds(0.4f); //Tiempo de espera para que la animación de ataque se sincronice con el hitbox
+        hitCollider.SetActive(true);
+     
         Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
     void ResetAttack()

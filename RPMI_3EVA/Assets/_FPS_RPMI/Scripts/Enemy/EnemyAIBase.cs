@@ -212,9 +212,9 @@ public class EnemyAIBase : MonoBehaviour
     }
     IEnumerator Attack()
     {
-
+        alreadyAttacked = true;
         anim.SetTrigger("isAttacking");
-        yield return new WaitForSeconds(0.8f); //Tiempo de espera para que la animación de ataque se sincronice con el hitbox
+        yield return new WaitForSeconds(0.6f); //Tiempo de espera para que la animación de ataque se sincronice con el hitbox
         hitCollider.SetActive(true);
         alreadyAttacked = true;
         Invoke(nameof(ResetAttack), timeBetweenAttacks);
