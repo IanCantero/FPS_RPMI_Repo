@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class EnemyAIBlind : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class EnemyAIBlind : MonoBehaviour
     [SerializeField] float chasingSpeed = 4f;
     Animator anim;
     [SerializeField] GameObject body; 
+    [SerializeField] GameObject hitCollider; 
     #endregion
 
     private void Awake()
@@ -63,6 +65,7 @@ public class EnemyAIBlind : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
         lastCheckTime = Time.time;
+        hitCollider.SetActive(false);
     }
 
     // Update is called once per frame
@@ -222,18 +225,23 @@ public class EnemyAIBlind : MonoBehaviour
             rb.AddForce(transform.forward * shootSpeedZ + transform.up * shootSpeedY, ForceMode.Impulse);
 
             */
-            anim.SetTrigger("isAttacking");
-
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            StartCoroutine(Attack());
         }
     }
-
+    IEnumerator Attack()
+    {
+        alreadyAttacked = true;
+        anim.SetTrigger("isAttacking");
+        yield return new WaitForSeconds(0.4f); //Tiempo de espera para que la animación de ataque se sincronice con el hitbox
+        hitCollider.SetActive(true);
+     
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
+    }
     void ResetAttack()
     {
         //Acción que resetea el ataque
         alreadyAttacked = false;
+        hitCollider.SetActive(false);
     }
 
     void CheckIfStuck()
