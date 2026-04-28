@@ -2,15 +2,64 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    //Declaración del Singleton
+    private static AudioManager instance;
+    public static AudioManager Instance
     {
-        
+        get
+        {
+            if (instance == null) Debug.Log("No hay AudioManager");
+            return instance;
+        }
+
+    }
+    //Fin del Singleton
+
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
+    public AudioClip[] musicLibrary;
+    public AudioClip[] sfxLibrary;
+
+    private void Awake()
+    {
+
+        if (instance == null)
+        {
+            //Si no hay GameManager lo referenciamos y hacemos que perdure entre escenas
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            //Si ya hay GameManager el duplicado se destruye
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayMusic(int musicToPlay)
     {
-        
+        musicSource.clip = musicLibrary[musicToPlay];
+        musicSource.Play();  //Reproducir la musica
+    }
+
+    public void PlaySFX(int sfxToPlay)
+    {
+        sfxSource.PlayOneShot(sfxLibrary[sfxToPlay]);
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+
+    public void PauseMusic()
+    {
+        musicSource.Pause();
+    }
+
+    public void UnPauseMusic()
+    {
+        musicSource.UnPause();
     }
 }

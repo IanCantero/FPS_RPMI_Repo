@@ -1,16 +1,18 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void LoadScene(int sceneToLoad)
     {
-        
+        SceneManager.LoadScene(sceneToLoad);
+        //AudioManager.Instance.PlaySFX(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ExitGame()
     {
-        
+        Debug.Log("Has cerrado el juego.");
+        //AudioManager.Instance.PlaySFX(0);
+        Application.Quit();
     }
 }
