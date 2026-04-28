@@ -222,7 +222,7 @@ public class EnemyAIBlind : MonoBehaviour
             rb.AddForce(transform.forward * shootSpeedZ + transform.up * shootSpeedY, ForceMode.Impulse);
 
             */
-            anim.SetTrigger("Attack");
+            anim.SetTrigger("isAttacking");
 
 
             alreadyAttacked = true;

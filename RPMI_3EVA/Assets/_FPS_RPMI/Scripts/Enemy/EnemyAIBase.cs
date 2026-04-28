@@ -23,10 +23,7 @@ public class EnemyAIBase : MonoBehaviour
 
     [Header("Attacking Stats")]
     [SerializeField] float timeBetweenAttacks = 1f; //Tiempo entre ataque y ataque
-    [SerializeField] GameObject projectile; //Ref al prefab del proyectil
-    [SerializeField] Transform shootPoint; //Posición inicial del disparo
-    [SerializeField] float shootSpeedY; //Potencia de disparo vertical (Solo catapulta)
-    [SerializeField] float shootSpeedZ = 10f; //Potencia de disparo hacia delante (Siempre está)
+
     bool alreadyAttacked; //Se pregunta si estamos atacando para no stackear ataques
 
     [Header("States & Detection Areas")]
