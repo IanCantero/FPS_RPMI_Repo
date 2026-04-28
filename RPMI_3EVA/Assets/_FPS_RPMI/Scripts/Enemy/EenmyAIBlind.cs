@@ -48,7 +48,8 @@ public class EnemyAIBlind : MonoBehaviour
     [Header("More Variables")]
     FPSController FPSController;
     [SerializeField] float patrolingSpeed = 2f; 
-    [SerializeField] float chasingSpeed = 4f; 
+    [SerializeField] float chasingSpeed = 4f;
+    Animator anim;
     #endregion
 
     private void Awake()
@@ -61,6 +62,7 @@ public class EnemyAIBlind : MonoBehaviour
             FPSController = playerObj.GetComponent<FPSController>();
         }
 
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
         lastCheckTime = Time.time;
