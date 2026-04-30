@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("Feedback Comfiguration")]
     [SerializeField] Material damagedMat; //Mat de feedback de dañado
-    [SerializeField] MeshRenderer enemyRend; //Ref al renderer del enemy
+    [SerializeField] SkinnedMeshRenderer enemyRend; //Ref al renderer del enemy
     [SerializeField] GameObject deathVFX; //Ref al sistema de partículas de muerte
     Material baseMat; //Ref al modelo base del enemigo
 
@@ -16,8 +16,10 @@ public class EnemyHealth : MonoBehaviour
 
     private void Awake()
     {
+        enemyRend = GetComponentInChildren<SkinnedMeshRenderer>(); //Busca el renderer en los hijos del enemigo
         health = maxHealth;
         baseMat = enemyRend.material;
+       
     }
 
     // Update is called once per frame
