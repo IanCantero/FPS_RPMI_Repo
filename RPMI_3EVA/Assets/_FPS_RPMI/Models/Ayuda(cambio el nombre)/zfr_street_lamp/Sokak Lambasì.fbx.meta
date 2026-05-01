@@ -3,7 +3,22 @@ guid: e3ab15b2dc6e2f443aca188f4473b146
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: fd92672eb5f441340a3a7f886918368c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: street_lamp_01
+    second: {fileID: 7244060264802086511, guid: 2fde2a3920f7b09479c99945a7d1fdf8, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: street_lamp_01_bulb
+    second: {fileID: 2100000, guid: fd92672eb5f441340a3a7f886918368c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
