@@ -105,6 +105,8 @@ public class GunSystem : MonoBehaviour
         reloading = true; //Recargando
         //LLAMADA DE ANIMACIÓN DE RECARGA
 
+        AudioManager.Instance.PlaySFX(3);
+
         yield return new WaitForSeconds(reloadTime); //Esperar a que se haga la animacion
         bulletsLeft = ammoSize; 
         reloading = false;
@@ -115,6 +117,9 @@ public class GunSystem : MonoBehaviour
         //Mide el tiempo entre disparo y la gestion del gasto de balas, ademas de gastar el raycast de disparo de Shoot()
         canShoot = false; //No podemos disparar si ya lo estamos haciendo
         shootEffect.SetActive(true); //Activar VFX de disparo
+
+        AudioManager.Instance.PlaySFX(4);
+
         if (!allowButtonHold)
         {
             shooting = false; //Cerrar ciclo de disparo

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -62,4 +63,23 @@ public class AudioManager : MonoBehaviour
     {
         musicSource.UnPause();
     }
+
+    public void FadeOutPasos(float tiempo)
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoFadeOut(tiempo));
+    }
+
+    private IEnumerator DoFadeOut(float duration)
+    {
+        float startVolume = sfxSource.volume;
+        while (sfxSource.volume > 0)
+        {
+            sfxSource.volume -= startVolume * Time.deltaTime / duration;
+            yield return null;
+        }
+        sfxSource.Stop();
+        sfxSource.volume = startVolume;
+    }
+
 }

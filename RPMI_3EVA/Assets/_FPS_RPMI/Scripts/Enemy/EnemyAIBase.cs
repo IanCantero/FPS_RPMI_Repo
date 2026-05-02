@@ -46,6 +46,7 @@ public class EnemyAIBase : MonoBehaviour
     [SerializeField] float patrolingSpeed = 2f;
     [SerializeField] float chasingSpeed = 4f;
     Animator anim;
+    float footstepTimer; //Controla el ritmo de los pasos
     [SerializeField] GameObject body;
     [SerializeField] GameObject hitCollider;
 
@@ -72,6 +73,8 @@ public class EnemyAIBase : MonoBehaviour
     {
         EnemyStateUpdater();
         CheckIfStuck();
+
+
     }
 
     void EnemyStateUpdater()
@@ -213,6 +216,7 @@ public class EnemyAIBase : MonoBehaviour
     IEnumerator Attack()
     {
         alreadyAttacked = true;
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(0);
         anim.SetTrigger("isAttacking");
         yield return new WaitForSeconds(0.6f); //Tiempo de espera para que la animación de ataque se sincronice con el hitbox
         hitCollider.SetActive(true);
