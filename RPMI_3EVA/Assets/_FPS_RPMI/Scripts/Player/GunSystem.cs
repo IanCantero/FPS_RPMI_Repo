@@ -28,7 +28,7 @@ public class GunSystem : MonoBehaviour
     int bulletsLeft; //Cantidad de balas dentro del cargador actual
 
     [Header("FeedbackReferences")]
-    [SerializeField] GameObject impactEffect; //Ref al VFX de impacto de balas
+    [SerializeField] GameObject shootEffect; //Ref al VFX de impacto de balas
 
     [Header("Dev - Gun State Bools")]
     [SerializeField] bool shooting; //Indica si estamos disparando
@@ -107,6 +107,7 @@ public class GunSystem : MonoBehaviour
     {
         //Mide el tiempo entre disparo y la gestion del gasto de balas, ademas de gastar el raycast de disparo de Shoot()
         canShoot = false; //No podemos disparar si ya lo estamos haciendo
+        shootEffect.SetActive(true); //Activar VFX de disparo
         if (!allowButtonHold)
         {
             shooting = false; //Cerrar ciclo de disparo
@@ -118,6 +119,7 @@ public class GunSystem : MonoBehaviour
             bulletsLeft--;
         }
         yield return new WaitForSeconds(shootingCooldown);
+        shootEffect.SetActive(false); //Desactivar VFX de disparo
         canShoot = true;
     }
 
