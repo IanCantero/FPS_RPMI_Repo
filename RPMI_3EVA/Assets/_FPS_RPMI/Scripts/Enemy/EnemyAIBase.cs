@@ -130,6 +130,7 @@ public class EnemyAIBase : MonoBehaviour
         if (walkPointSet)
         {
             agent.SetDestination(walkPoint);
+
         }
 
         //2 - Una vez ha llegado al punto, hay que decirle al sistema que puede generar uno nuevo

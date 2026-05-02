@@ -231,6 +231,7 @@ public class EnemyAIBlind : MonoBehaviour
     IEnumerator Attack()
     {
         alreadyAttacked = true;
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(0);
         anim.SetTrigger("isAttacking");
         yield return new WaitForSeconds(0.4f); //Tiempo de espera para que la animación de ataque se sincronice con el hitbox
         hitCollider.SetActive(true);
