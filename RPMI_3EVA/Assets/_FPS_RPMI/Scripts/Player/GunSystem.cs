@@ -29,6 +29,8 @@ public class GunSystem : MonoBehaviour
 
     [Header("FeedbackReferences")]
     [SerializeField] GameObject shootEffect; //Ref al VFX de impacto de balas
+    [SerializeField] GameObject lights;
+
 
     [Header("Dev - Gun State Bools")]
     [SerializeField] bool shooting; //Indica si estamos disparando
@@ -43,6 +45,7 @@ public class GunSystem : MonoBehaviour
         bulletsLeft = ammoSize; //Cargador lleno al iniciar partida
         canShoot = false;
         anim = GetComponent<Animator>();
+        lights.SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,6 +64,7 @@ public class GunSystem : MonoBehaviour
         {
             anim.SetTrigger("GetAmmo");
             canShoot = true;
+            lights.SetActive(true);
         }
         if (other.CompareTag("NoAmmo"))
         {
