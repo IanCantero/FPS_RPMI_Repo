@@ -34,6 +34,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] bool shooting; //Indica si estamos disparando
     [SerializeField] bool canShoot; //Indica si podemos disparar en x momento del juego
     [SerializeField] bool reloading; //Indica si estamos recargando
+    Animator anim;
 
     #endregion
 
@@ -41,6 +42,7 @@ public class GunSystem : MonoBehaviour
     {
         bulletsLeft = ammoSize; //Cargador lleno al iniciar partida
         canShoot = false;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -57,6 +59,7 @@ public class GunSystem : MonoBehaviour
     {
         if (other.CompareTag("Ammo"))
         {
+            anim.SetTrigger("GetAmmo");
             canShoot = true;
         }
         if (other.CompareTag("NoAmmo"))
