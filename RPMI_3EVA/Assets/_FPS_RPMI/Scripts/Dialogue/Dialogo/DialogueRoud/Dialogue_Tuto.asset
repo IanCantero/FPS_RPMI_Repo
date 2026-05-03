@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem_V.Dialogue_Round
   dialogueTurnList:
   - <Character>k__BackingField: {fileID: 11400000, guid: 2d3001b912ed01842a10f8018f4e5e59, type: 2}
-    dialogue_line: Enemies looking towards the ceiling are blind and can not see
-      you if you crouch.
+    dialogue_line: Enemies looking towards the ceiling look like are blind, maby
+      if I crouch and try to not do much noise...
