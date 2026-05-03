@@ -9,6 +9,12 @@ namespace DialogueSystem_V
         [ContextMenu("Trigger Dialogue")]
         public void TriggerDialogue()
         {
+            if (DialogueManager.Instance == null)
+            {
+                Debug.LogError("DialogueManager no encontrado en la escena!");
+                return;
+            }
+
             DialogueManager.Instance.StartDialogue(dialogue);
         }
 

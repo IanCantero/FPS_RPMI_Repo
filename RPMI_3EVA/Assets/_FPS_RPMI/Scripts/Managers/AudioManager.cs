@@ -46,6 +46,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(int sfxToPlay)
     {
+        if (sfxToPlay < 0 || sfxToPlay >= sfxLibrary.Length)
+        {
+            Debug.LogWarning($"SFX index {sfxToPlay} no existe en sfxLibrary");
+            return;
+        }
         sfxSource.PlayOneShot(sfxLibrary[sfxToPlay]);
     }
 

@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem; // ✅ AÑADIDO
 
 namespace DialogueSystem_V
 {
@@ -23,11 +24,14 @@ namespace DialogueSystem_V
 
         public void StartDialogue(Dialogue_Round dialogue)
         {
-            if (IsDialogInProgress) 
+            if (IsDialogInProgress)
             {
-                Debug.LogWarning($"Dialogue already in progress");
+                Debug.LogWarning("Dialogue already in progress");
                 return;
             }
+
+            Debug.Log("Iniciando dialogo..."); 
+            Debug.Log($"Turns: {dialogue.Dialogue_Turns.Count}"); 
 
             IsDialogInProgress = true;
             dialogueTurnsQueue = new Queue<Dialogue_Turn>(dialogue.Dialogue_Turns);
@@ -36,6 +40,8 @@ namespace DialogueSystem_V
 
         private IEnumerator DialogueCoroutine()
         {
+            dialogueUI.gameObject.SetActive(true);
+            dialogueUI.transform.parent.gameObject.SetActive(true);
             dialogueUI.ShowDialogBox();
 
             while (dialogueTurnsQueue.Count > 0)
@@ -45,17 +51,16 @@ namespace DialogueSystem_V
                 dialogueUI.SetCharacterInfo(currentTurn.Character);
                 dialogueUI.ClearDialogueArea();
                 dialogueUI.SetDialogArea(currentTurn.Dialogue_Line);
-                
 
-                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+                yield return new WaitForSeconds(0.3f); 
+                yield return new WaitUntil(() => Keyboard.current.eKey.wasPressedThisFrame);
                 yield return null;
             }
 
             dialogueUI.HideDialogBox();
             IsDialogInProgress = false;
         }
-
-        
     }
+    
+    
 }
-
