@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eed94e0f809b693489b401715162750b, type: 3}
-  m_Name: Dialogue_Papel
+  m_Name: Dialogue_Paper4
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem_V.Dialogue_Round
   dialogueTurnList:
   - <Character>k__BackingField: {fileID: 11400000, guid: 2d3001b912ed01842a10f8018f4e5e59, type: 2}
-    dialogue_line: I've been here for almost four months now...i can't keep living
-      like this. I must find an exit.
+    dialogue_line: I keep finding strange...creatures all around what the hell are
+      those things.
