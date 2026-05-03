@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Fade
+  m_Name: M_Fade_Base
   m_Shader: {fileID: -6465566751694194690, guid: bfc4125f064c64847a6d2ba26c77a9da, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EnemyTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cef1354085cc71945ab9255421eeecb8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:

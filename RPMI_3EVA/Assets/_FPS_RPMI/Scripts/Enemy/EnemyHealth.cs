@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("Feedback Comfiguration")]
     [SerializeField] Material damagedMat; //Mat de feedback de dañado
+    [SerializeField] Material deathMat; //Mat de feedback de muerte
     [SerializeField] SkinnedMeshRenderer enemyRend; //Ref al renderer del enemy
     [SerializeField] GameObject deathVFX; //Ref al sistema de partículas de muerte
     Material baseMat; //Ref al modelo base del enemigo
@@ -28,7 +29,9 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             health = 0; 
-            deathVFX.SetActive(true); //Se enciende el VFX
+            enemyRend.material = deathMat; //Cambiar mat base por muerte
+            //deathMat.SetFloatDissolveAmount(1);
+            //deathVFX.SetActive(true); //Se enciende el VFX
             deathVFX.transform.position =  transform.position; //Se hace tp al player
             gameObject.SetActive(false); //Se apaga el enmigo y "muere"
         }
