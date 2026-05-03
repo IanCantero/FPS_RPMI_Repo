@@ -17,8 +17,8 @@ public class PickUp : MonoBehaviour
           if (pickupSound != null) 
             {
 
-                AudioSource.PlayClipAtPoint(pickupSound, transform.position);
-            
+                AudioSource.PlayClipAtPoint(pickupSound, Camera.main.transform.position);
+
             }
             
             Debug.Log("Objeto recogido: " + gameObject.name);
