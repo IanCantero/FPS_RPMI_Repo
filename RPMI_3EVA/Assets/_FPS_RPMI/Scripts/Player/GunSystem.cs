@@ -153,6 +153,7 @@ public class GunSystem : MonoBehaviour
     {
         if (context.performed)
         {
+            anim.SetTrigger("Reload");
             Reload();
         }
 
