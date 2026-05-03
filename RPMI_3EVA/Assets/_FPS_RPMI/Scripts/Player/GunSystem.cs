@@ -30,6 +30,7 @@ public class GunSystem : MonoBehaviour
     [Header("FeedbackReferences")]
     [SerializeField] GameObject shootEffect; //Ref al VFX de impacto de balas
     [SerializeField] GameObject lights;
+    [SerializeField] GameObject overHeat;
 
 
     [Header("Dev - Gun State Bools")]
@@ -46,6 +47,7 @@ public class GunSystem : MonoBehaviour
         canShoot = false;
         anim = GetComponent<Animator>();
         lights.SetActive(false);
+        overHeat.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,7 +57,11 @@ public class GunSystem : MonoBehaviour
         {
             StartCoroutine(ShootRoutine());
         } 
-        
+        if (bulletsLeft <= 1)
+        {
+            overHeat.SetActive(true);
+        }
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -109,6 +115,7 @@ public class GunSystem : MonoBehaviour
 
         yield return new WaitForSeconds(reloadTime); //Esperar a que se haga la animacion
         bulletsLeft = ammoSize; 
+        overHeat.SetActive(false);
         reloading = false;
     }
 
@@ -126,7 +133,7 @@ public class GunSystem : MonoBehaviour
         }
         for (int i = 0; i < bulletsPerTap; i++)
         {
-            if (bulletsLeft <= 0) break;  //2ª prev de errores
+            if (bulletsLeft <= 0) break;
             Shoot();
             bulletsLeft--;
         }
