@@ -50,6 +50,11 @@ public class EnemyAIBase : MonoBehaviour
     [SerializeField] GameObject body;
     [SerializeField] GameObject hitCollider;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip footstepClip;
+    [SerializeField] private float baseStepSpeed = 0.5f;
+
     #endregion
 
     private void Awake()
@@ -73,7 +78,7 @@ public class EnemyAIBase : MonoBehaviour
     {
         EnemyStateUpdater();
         CheckIfStuck();
-
+        HandleFootsteps();
 
     }
 
@@ -256,6 +261,32 @@ public class EnemyAIBase : MonoBehaviour
 
             lastPosition = transform.position;
             lastCheckTime = Time.time;
+        }
+    }
+
+    void HandleFootsteps()
+    {
+        // Si el enemigo se está moviendo físicamente
+        if (agent.velocity.magnitude > 0.1f)
+        {
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0)
+            {
+                // Reproduce el sonido
+                if (audioSource != null && footstepClip != null)
+                {
+                    audioSource.PlayOneShot(footstepClip);
+                }
+
+                // Ajusta el ritmo: si corre (chase), los pasos son más seguidos
+                float currentStepDelay = targetInSightRange ? baseStepSpeed * 0.6f : baseStepSpeed;
+                footstepTimer = currentStepDelay;
+            }
+        }
+        else
+        {
+            footstepTimer = 0; // Reinicia para que el primer paso suene al instante al arrancar
         }
     }
 

@@ -42,6 +42,12 @@ public class EnemyAIBlind : MonoBehaviour
     float lastCheckTime; //Tiempo de chequeo previo a estar stuck
     Vector3 lastPosition; //Posición del último walkpoint perseguido
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip footstepClip;
+    [SerializeField] private float baseStepSpeed = 0.5f;
+    float footstepTimer;
+
     [Header("More Variables")]
     FPSController FPSController;
     [SerializeField] float patrolingSpeed = 2f; 
@@ -73,6 +79,7 @@ public class EnemyAIBlind : MonoBehaviour
     {
         EnemyStateUpdater();
         CheckIfStuck();
+        HandleFootsteps();
     }
 
     void EnemyStateUpdater()
@@ -270,6 +277,31 @@ public class EnemyAIBlind : MonoBehaviour
 
             lastPosition = transform.position;
             lastCheckTime = Time.time;
+        }
+    }
+
+    void HandleFootsteps()
+    {
+        // Si el enemigo se está moviendo
+        if (agent.velocity.magnitude > 0.1f)
+        {
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0)
+            {
+                if (audioSource != null && footstepClip != null)
+                {
+                    audioSource.PlayOneShot(footstepClip);
+                }
+
+                // Si está persiguiendo (Chase), pasos más rápidos
+                float currentStepDelay = targetInSightRange ? baseStepSpeed * 0.6f : baseStepSpeed;
+                footstepTimer = currentStepDelay;
+            }
+        }
+        else
+        {
+            footstepTimer = 0;
         }
     }
 

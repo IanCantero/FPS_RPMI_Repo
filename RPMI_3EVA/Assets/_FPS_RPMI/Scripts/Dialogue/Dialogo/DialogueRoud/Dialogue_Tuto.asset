@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed94e0f809b693489b401715162750b, type: 3}
+  m_Name: Dialogue_Tuto
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem_V.Dialogue_Round
+  dialogueTurnList:
+  - <Character>k__BackingField: {fileID: 11400000, guid: 2d3001b912ed01842a10f8018f4e5e59, type: 2}
+    dialogue_line: Enemies looking towards the ceiling are blind and can not see
+      you, be aware of your surrondings.
